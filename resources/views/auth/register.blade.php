@@ -10,6 +10,16 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Daftar Sebagai</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="userAs">
+                                    <option value="1">Penjual</option>
+                                    <option value="0">Pembeli</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Nama</label>
 
@@ -134,17 +144,17 @@
 
                         
 
-                            <label class="col-md-4 control-label">Unggah Foto</label>
+                        <!--     <label class="col-md-4 control-label">Unggah Foto</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6"> -->
                                 <!-- <form action="{{ URL::to('uploadImageMerchant') }}" method="post" enctype="multipart/form-data" id="uploadImage"> -->
-                                    <input type="file" name="imageMerchant" id="imageMerchant" required>
+                                    <!-- <input type="file" name="imageMerchant" id="imageMerchant" required> -->
                                     
                                     <!-- <input type="button" value="Upload" name="submit" onClick='uploadButton();'> -->
                                     
-                                    <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                                    <!-- <input type="hidden" value="{{ csrf_token() }}" name="_token"> -->
                                 <!-- </form> -->
-                            </div>
+                            <!-- </div> -->
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -160,47 +170,5 @@
         </div>
     </div>
 </div>
-
-<script type='text/javascript'>
-    var LOCAL_URL = "{{ URL::to('uploadImageMerchant') }}";
-    function uploadButton() {
-        var data = $('#uploadImage').serialize();
-        $.post( LOCAL_URL, data, new function(response){
-            // Successfully posted by AJAX to Local Website;
-            //  -- now POST the form to the destination site, 
-            //  -- & navigate to that result page.
-            $('#uploadImage').submit();
-        });
-        // $('#uploadImage').submit();  
-
-
-        $("#uploadImage").submit(function (event) {
-        event.preventDefault();
-        //grab all form data  
-        var formData = $(this).serialize();
-
-        $.ajax({
-            url: "{{ URL::to('uploadImageMerchant') }}",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: true,
-            processData: false,
-            success: function (returndata) {
-                $("#productFormOutput").html(returndata);
-                alert(formData);
-            },
-            error: function () {
-                alert("error in ajax form submission");
-            }
-        });
-
-      return false;
-  });
-
-
-    }
-</script>
 
 @endsection

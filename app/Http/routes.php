@@ -30,10 +30,36 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::post('uploadImageMerchant', 'uploadController@uploadImageMerchant');
+// Route::post('uploadImageMerchant', 'uploadController@uploadImageMerchant');
+
+Route::get('/merchant/viewProfile', 'MerchantController@viewProfile');
+
+//SocialAuth
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
 });
+
+Route::group(['middleware'=>'web'], function(){
+	Route::auth();
+});
+
+Route::group(['middleware'=>['web', 'auth']], function()
+{
+	Route::get('/home', 'HomeController@index');
+	Route::get('/', function(){
+		if(Auth::user()->userAs == 1){
+			return view ('merchant/merchant_home');
+		}else{
+			return view('pembeli/pembeli_home');
+		}
+	});
+});
+
+Route::get('userAs', ['middleware'=>['web','auth','userAs'],function(){
+	return view('merchant/merchant_home');
+}]);

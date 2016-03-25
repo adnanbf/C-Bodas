@@ -45,29 +45,43 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
+                @if (Auth::guest())
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
+                    </ul>
+                @else
+                    <ul class="nav navbar-nav">
+                        <!-- Authentication Links -->
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        @if (Auth::user()->userAs == 1)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                    Master<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="">Anu</a></li>
+                                    <li><a href="">Anuanu</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Selamat Datang {{ Auth::user()->name }} <span class="caret"></span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('merchant/viewProfile') }}">
+                                    <i class="fa fa-btn fa-sign-out"></i>Lihat Profil</a>
+                                </li>
+                                <li><a href="{{ url('/logout') }}">
+                                    <i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                                </li>
                             </ul>
                         </li>
-                    @endif
-                </ul>
+                    </ul>
+                @endif
             </div>
         </div>
     </nav>
