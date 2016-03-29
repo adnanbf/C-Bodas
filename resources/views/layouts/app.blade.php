@@ -72,8 +72,8 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('merchant/viewProfile') }}">
-                                    <i class="fa fa-btn fa-sign-out"></i>Lihat Profil</a>
+                                <li><a href="{{ url('user/profile') }}">
+                                    <i class="fa fa-btn fa-user"></i>Lihat Profil</a>
                                 </li>
                                 <li><a href="{{ url('/logout') }}">
                                     <i class="fa fa-btn fa-sign-out"></i>Logout</a>

@@ -26,13 +26,11 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+// Route::resource('merchant', 'MerchantController');
+
+
 
 // Route::post('uploadImageMerchant', 'uploadController@uploadImageMerchant');
-
-Route::get('/merchant/viewProfile', 'MerchantController@viewProfile');
 
 //SocialAuth
 Route::get('/redirect', 'SocialAuthController@redirect');
@@ -42,10 +40,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
-});
 
-Route::group(['middleware'=>'web'], function(){
-	Route::auth();
+    Route::resource('profile', 'UserController');
+
+    Route::get('/merchant/profile', 'MerchantController@profile');
+
+    Route::get('/merchant/editProfile', 'MerchantController@editProfile');
 });
 
 Route::group(['middleware'=>['web', 'auth']], function()
@@ -63,3 +63,7 @@ Route::group(['middleware'=>['web', 'auth']], function()
 Route::get('userAs', ['middleware'=>['web','auth','userAs'],function(){
 	return view('merchant/merchant_home');
 }]);
+
+// Route::group(['middleware'=>'web'], function(){
+// 	Route::auth();
+// });

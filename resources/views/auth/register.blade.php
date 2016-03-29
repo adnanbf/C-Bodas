@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script type="text/javascript">
+
+   function changeFunc() {
+    // var userAs = document.getElementById("userAs");
+    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    var x = document.getElementById("userAs").value;
+    document.getElementById("showValue").innerHTML = x;
+   }
+
+  </script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -13,11 +25,14 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Daftar Sebagai</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="userAs">
+                                <select class="form-control" name="userAs" id="userAs" onchange="changeFunc();">
                                     <option value="1">Penjual</option>
                                     <option value="0">Pembeli</option>
                                 </select>
                             </div>
+
+                        <p id="showValue"></p>
+
                         </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -90,57 +105,58 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('streetMerchant') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Alamat</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="streetMerchant" placeholder="Jalan + Nomor" value="{{ old('streetMerchant') }}">
-
-                                @if ($errors->has('streetMerchant'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('streetMerchant') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
                         
-                        <div class="form-group{{ $errors->has('cityMerchant') ? ' has-error' : '' }}">
-                            <div class="col-md-6 col-md-offset-4">
-                                <input type="text" class="form-control" name="cityMerchant" placeholder="Kota" value="{{ old('cityMerchant') }}">
+                            <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Alamat</label>
 
-                                @if ($errors->has('cityMerchant'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cityMerchant') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
 
-                        <div class="form-group{{ $errors->has('provMerchant') ? ' has-error' : '' }}">
-
-                            <div class="col-md-6 col-md-offset-4">
-                                <input type="text" class="form-control" name="provMerchant" placeholder="Propinsi" value="{{ old('provMerchant') }}">
-                                    
-                                @if ($errors->has('provMerchant'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('provMerchant') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('zipCodeMerchant') ? ' has-error' : '' }}">
-
-                            <div class="col-md-6 col-md-offset-4">
-                                <input type="text" class="form-control" name="zipCodeMerchant" placeholder="Kode Pos" maxlength="5" value="{{ old('zipCodeMerchant') }}">
-
-                                    @if ($errors->has('zipCodeMerchant'))
+                                    @if ($errors->has('street'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('zipCodeMerchant') }}</strong>
+                                            <strong>{{ $errors->first('street') }}</strong>
                                         </span>
                                     @endif
+                                </div>
                             </div>
-                        </div>
+                            
+                            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <input type="text" class="form-control" name="city" placeholder="Kota" value="{{ old('city') }}">
+
+                                    @if ($errors->has('city'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('city') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('prov') ? ' has-error' : '' }}">
+
+                                <div class="col-md-6 col-md-offset-4">
+                                    <input type="text" class="form-control" name="prov" placeholder="Propinsi" value="{{ old('prov') }}">
+                                        
+                                    @if ($errors->has('prov'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('prov') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('zipCode') ? ' has-error' : '' }}">
+
+                                <div class="col-md-6 col-md-offset-4">
+                                    <input type="text" class="form-control" name="zipCode" placeholder="Kode Pos" maxlength="5" value="{{ old('zipCode') }}">
+
+                                        @if ($errors->has('zipCode'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('zipCode') }}</strong>
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
 
                         
 

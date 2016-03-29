@@ -19,10 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('telp');
-            $table->string('streetMerchant');
-            $table->string('cityMerchant');
-            $table->string('provMerchant');
-            $table->string('zipCodeMerchant');
+            $table->string('street');
+            $table->string('city');
+            $table->string('prov');
+            $table->string('zipCode');
             $table->rememberToken();
             $table->timestamps();
         });

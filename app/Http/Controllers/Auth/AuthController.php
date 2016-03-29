@@ -53,10 +53,10 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'telp' => 'required|max:12',
-            'streetMerchant' => 'required|max:255',
-            'cityMerchant' => 'required|max:255',
-            'provMerchant' => 'required|max:255',
-            'zipCodeMerchant' => 'required|max:5',
+            'street' => 'required|max:255',
+            'city' => 'required|max:255',
+            'prov' => 'required|max:255',
+            'zipCode' => 'required|max:5',
         ]);
     }
 
@@ -74,10 +74,10 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'telp' => $data['telp'],
-            'streetMerchant' => $data['streetMerchant'],
-            'cityMerchant' => $data['cityMerchant'],
-            'provMerchant' => $data['provMerchant'],
-            'zipCodeMerchant' => $data['zipCodeMerchant'],
+            'street' => $data['street'],
+            'city' => $data['city'],
+            'prov' => $data['prov'],
+            'zipCode' => $data['zipCode'],
         ]);
     }
 }

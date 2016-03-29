@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard Pembeli</div>
 
                 <div class="panel-body">
-                    {{Auth::user()->name}}
+                    Selamat datang kembali {{Auth::user()->name}}
                 </div>
             </div>
         </div>
