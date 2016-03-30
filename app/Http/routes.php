@@ -33,19 +33,21 @@ Route::get('/', function () {
 // Route::post('uploadImageMerchant', 'uploadController@uploadImageMerchant');
 
 //SocialAuth
-Route::get('/redirect', 'SocialAuthController@redirect');
-Route::get('/callback', 'SocialAuthController@callback');
+// Route::get('/redirect', 'SocialAuthController@redirect');
+// Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('profile', 'UserController');
+    Route::resource('user/profile', 'UserController');
 
-    Route::get('/merchant/profile', 'MerchantController@profile');
+    // Route::resource('profile', 'UserController');
 
-    Route::get('/merchant/editProfile', 'MerchantController@editProfile');
+    // Route::get('user/profile', 'UserController@index');
+    Route::resource('user/editProfile', 'UserController');
+
 });
 
 Route::group(['middleware'=>['web', 'auth']], function()
@@ -63,7 +65,3 @@ Route::group(['middleware'=>['web', 'auth']], function()
 Route::get('userAs', ['middleware'=>['web','auth','userAs'],function(){
 	return view('merchant/merchant_home');
 }]);
-
-// Route::group(['middleware'=>'web'], function(){
-// 	Route::auth();
-// });

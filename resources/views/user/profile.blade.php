@@ -8,7 +8,7 @@
                 <div class="panel-heading">Profil {{Auth::user()->name}}</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="">
+                    <form class="form-horizontal" role="form" method="POST" action="/user/editProfile">
 
                         <div class="form-group">
                             <label class="col-md-4" align="right">Nama</label>
@@ -42,9 +42,10 @@
                             <div class="col-md-6 col-md-offset-4">{{Auth::user()->zipCode}}</div>
                         </div>
 
-                        <!-- @foreach($users as $user)
-                            <p> {{ $user -> name}} </p>
-                        @endforeach -->
+                        <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"></input> -->
+                        <!-- <button type="submit" class="btn btn-primary" name="submit" value="">
+                            <i class="fa fa-btn fa-user"></i>Edit Profile
+                        </button> -->
 
                     </form>
 
