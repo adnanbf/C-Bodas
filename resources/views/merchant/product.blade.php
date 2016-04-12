@@ -5,9 +5,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+                <div class="panel-heading">Lapak</div>
 
-                
+                <div class="panel-body">
+                    {{Auth::user()->name}}
+                    <a href="{{ url('merchant/create') }}" class="btn btn-warning btn-sm">Lapak Baru</a>
                 </div>
             </div>
         </div>

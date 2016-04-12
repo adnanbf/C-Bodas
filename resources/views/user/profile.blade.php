@@ -42,10 +42,18 @@
                             <div class="col-md-6 col-md-offset-4">{{Auth::user()->zipCode}}</div>
                         </div>
 
-                        <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"></input> -->
-                        <!-- <button type="submit" class="btn btn-primary" name="submit" value="">
+@foreach($users as $user)
+
+    <p>{{$user-> name}}</p>
+    <p>{{$user-> email}}</p>
+    <hr>
+
+@endforeach
+
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                        <button type="submit" class="btn btn-primary" name="submit" value="">
                             <i class="fa fa-btn fa-user"></i>Edit Profile
-                        </button> -->
+                        </button>
 
                     </form>
 

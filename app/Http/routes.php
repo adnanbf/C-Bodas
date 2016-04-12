@@ -37,31 +37,33 @@ Route::get('/', function () {
 // Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'web'], function () {
+
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('user/profile', 'UserController');
-
-    // Route::resource('profile', 'UserController');
-
-    // Route::get('user/profile', 'UserController@index');
-    Route::resource('user/editProfile', 'UserController');
-
-});
-
-Route::group(['middleware'=>['web', 'auth']], function()
-{
-	Route::get('/home', 'HomeController@index');
-	Route::get('/', function(){
-		if(Auth::user()->userAs == 1){
-			return view ('merchant/merchant_home');
+    Route::get('/', function(){
+		if (!empty(Auth::user())) {
+			if(Auth::user()->userAs == 1){
+				return view ('merchant/merchant_home');
+			}else{
+				return view('pembeli/pembeli_home');
+			}
 		}else{
-			return view('pembeli/pembeli_home');
+			return view('welcome');
 		}
 	});
+
+    Route::resource('user/profile', 'UserController');
+
+    Route::resource('user/editProfile', 'UserController@editProfile');
+
+    Route::resource('merchant/product', 'ProductController');
+
+    Route::resource('merchant/create', 'ProductController@create');
+
 });
 
-Route::get('userAs', ['middleware'=>['web','auth','userAs'],function(){
+Route::get('userAs', ['middleware'=>['web','auth','userAs'], function(){
 	return view('merchant/merchant_home');
 }]);

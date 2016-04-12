@@ -24,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // if(!empty(auth()->user()) && auth()->user()->userAs == 1){
+        //     return view ('merchant/merchant_home');
+        // }else{
+        //     return view('pembeli/pembeli_home');
+        // }
     }
 }

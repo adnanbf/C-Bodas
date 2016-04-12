@@ -15,6 +15,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+    <!-- bootsrap datepicker-->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script> -->
+    
+
     <style>
         body {
             font-family: 'Lato';
@@ -48,25 +53,30 @@
                 @if (Auth::guest())
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/register') }}">Daftar</a></li>
                     </ul>
                 @else
                     <ul class="nav navbar-nav">
                         <!-- Authentication Links -->
                         <li><a href="{{ url('/') }}">Home</a></li>
-                        @if (Auth::user()->userAs == 1)
+                        <!-- @if (Auth::user()->userAs == 1)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                                    Master<span class="caret"></span>
+                                    Lalala<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="">Anu</a></li>
-                                    <li><a href="">Anuanu</a></li>
+                                    <li><a href="{{ url('user/profile') }}">Profil</a></li>
+                                    <li><a href="">Lapak</a></li>
                                 </ul>
                             </li>
-                        @endif
+                        @endif -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="{{ url('merchant/product') }}">
+                                Lapak
+                            </a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                                 {{ Auth::user()->name }} <span class="caret"></span>

@@ -6,16 +6,25 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register Merchant</div>
+                <div class="panel-heading">Edit Profile {{Auth::user()->name}}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="">
+                    <form class="form-horizontal" role="form" method="POST" action="/user/profile/{{Auth::user()->id}}">
                         {!! csrf_field() !!}
 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">User Sebagai</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="userAs" id="userAs" disabled>
+                                    <option value="1">Penjual</option>
+                                    <option value="0">Pembeli</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Nama</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name">{{Auth::user()->name}}
+                                <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}">
                             </div>
                         </div>
 
@@ -23,35 +32,7 @@
                             <label class="col-md-4 control-label">Alamat E-Mail</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email">{{Auth::user()->email}}
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="email" class="form-control" name="email" value="{{Auth::user()->email}}">
                             </div>
                         </div>
 
@@ -59,7 +40,7 @@
                             <label class="col-md-4 control-label">Telepon</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="telp" maxlength="12" value="{{ old('telp') }}">
+                                <input type="text" class="form-control" name="telp" maxlength="12" value="{{Auth::user()->telp}}">
 
                                 @if ($errors->has('telp'))
                                     <span class="help-block">
@@ -74,7 +55,7 @@
                                 <label class="col-md-4 control-label">Alamat</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
+                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{Auth::user()->street}}">
 
                                     @if ($errors->has('street'))
                                         <span class="help-block">
@@ -86,7 +67,7 @@
                             
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="city" placeholder="Kota" value="{{ old('city') }}">
+                                    <input type="text" class="form-control" name="city" placeholder="Kota" value="{{Auth::user()->city}}">
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
@@ -99,7 +80,7 @@
                             <div class="form-group{{ $errors->has('prov') ? ' has-error' : '' }}">
 
                                 <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="prov" placeholder="Propinsi" value="{{ old('prov') }}">
+                                    <input type="text" class="form-control" name="prov" placeholder="Propinsi" value="{{Auth::user()->prov}}">
                                         
                                     @if ($errors->has('prov'))
                                         <span class="help-block">
@@ -112,7 +93,7 @@
                             <div class="form-group{{ $errors->has('zipCode') ? ' has-error' : '' }}">
 
                                 <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="zipCode" placeholder="Kode Pos" maxlength="5" value="{{ old('zipCode') }}">
+                                    <input type="text" class="form-control" name="zipCode" placeholder="Kode Pos" maxlength="5" value="{{Auth::user()->zipCode}}">
 
                                         @if ($errors->has('zipCode'))
                                             <span class="help-block">
@@ -138,8 +119,10 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" name="submit" value="Register">
-                                    <i class="fa fa-btn fa-user"></i>Register
+                                <button type="submit" class="btn btn-primary" name="submit" value="">
+                                    <input type="hidden" name="_method" value="put">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <i class="fa fa-btn fa-user"></i>Simpan
                                 </button>
                             </div>
                         </div>

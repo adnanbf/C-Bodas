@@ -4,20 +4,38 @@
 
 <script type="text/javascript">
 
-   function changeFunc() {
-    // var userAs = document.getElementById("userAs");
-    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    var x = document.getElementById("userAs").value;
-    document.getElementById("showValue").innerHTML = x;
-   }
+   // function changeFunc() {
+   //  // var userAs = document.getElementById("userAs");
+   //  // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+   //  var x = document.getElementById("userAs").value;
+   //  document.getElementById("showValue").innerHTML = x;
 
-  </script>
+
+   // }
+
+   function show(aval) {
+
+    if (aval == "1") {
+        hiddenPembeli.style.display='none';
+
+        hiddenPenjual.style.display='inline-block';
+        Form.fileURL.focus();
+
+    }else{
+        hiddenPenjual.style.display='none';
+
+        hiddenPembeli.style.display='inline-block';
+        Form.fileURL.focus();
+    }
+  }
+
+</script> 
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register Merchant</div>
+                <div class="panel-heading">Form Pendaftaran</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
@@ -25,13 +43,16 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Daftar Sebagai</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="userAs" id="userAs" onchange="changeFunc();">
+                                <!-- <select class="form-control" name="userAs" id="userAs" onchange="changeFunc();"> -->
+                                <select class="form-control" name="userAs" id="userAs" onchange="java_script_:show(this.options[this.selectedIndex].value)">
+                                <!-- <select class="form-control" name="userAs" id="userAs"> -->
+
                                     <option value="1">Penjual</option>
                                     <option value="0">Pembeli</option>
                                 </select>
                             </div>
 
-                        <p id="showValue"></p>
+                        <!-- <p id="showValue"></p> -->
 
                         </div>
 
@@ -105,36 +126,61 @@
                             </div>
                         </div>
 
-                        
-                            <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Alamat</label>
+                        <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Alamat</label>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
 
-                                    @if ($errors->has('street'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('street') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+                                @if ($errors->has('street'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('street') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            
+                        </div>
+
+<!-- hiddenPenjual -->
+                        <div id="hiddenPenjual" style="display:none" class="col-md-6 col-md-offset-4">
+
+                            <div class="form-group">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
+                                    <input type="text" class="form-control" name="city" value="Kab. Bandung" disabled>
+
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
+                                    <input type="text" class="form-control" name="prov" value="Jawa Barat" disabled>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
+                                    <input type="text" class="form-control" name="zipCode" maxlength="5" value="40391" disabled>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+<!-- hiddenPembeli -->
+                        <div id="hiddenPembeli" style="display:none" class="col-md-6 col-md-offset-4">
+                                                    
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="city" placeholder="Kota" value="{{ old('city') }}">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
+                                    <input type="text" class="form-control" name="city" placeholder="Kota / Kabupaten" value="{{ old('city') }}">
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('city') }}</strong>
                                         </span>
                                     @endif
-                                </div>
+                                <!-- </div> -->
                             </div>
 
                             <div class="form-group{{ $errors->has('prov') ? ' has-error' : '' }}">
 
-                                <div class="col-md-6 col-md-offset-4">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
                                     <input type="text" class="form-control" name="prov" placeholder="Propinsi" value="{{ old('prov') }}">
                                         
                                     @if ($errors->has('prov'))
@@ -142,12 +188,12 @@
                                             <strong>{{ $errors->first('prov') }}</strong>
                                         </span>
                                     @endif
-                                </div>
+                                <!-- </div> -->
                             </div>
 
                             <div class="form-group{{ $errors->has('zipCode') ? ' has-error' : '' }}">
 
-                                <div class="col-md-6 col-md-offset-4">
+                                <!-- <div class="col-md-6 col-md-offset-4"> -->
                                     <input type="text" class="form-control" name="zipCode" placeholder="Kode Pos" maxlength="5" value="{{ old('zipCode') }}">
 
                                         @if ($errors->has('zipCode'))
@@ -155,27 +201,14 @@
                                                 <strong>{{ $errors->first('zipCode') }}</strong>
                                             </span>
                                         @endif
-                                </div>
+                                <!-- </div> -->
                             </div>
-
-                        
-
-                        <!--     <label class="col-md-4 control-label">Unggah Foto</label>
-
-                            <div class="col-md-6"> -->
-                                <!-- <form action="{{ URL::to('uploadImageMerchant') }}" method="post" enctype="multipart/form-data" id="uploadImage"> -->
-                                    <!-- <input type="file" name="imageMerchant" id="imageMerchant" required> -->
-                                    
-                                    <!-- <input type="button" value="Upload" name="submit" onClick='uploadButton();'> -->
-                                    
-                                    <!-- <input type="hidden" value="{{ csrf_token() }}" name="_token"> -->
-                                <!-- </form> -->
-                            <!-- </div> -->
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" name="submit" value="Register">
-                                    <i class="fa fa-btn fa-user"></i>Register
+                                    <i class="fa fa-btn fa-user"></i>Daftar
                                 </button>
                             </div>
                         </div>
