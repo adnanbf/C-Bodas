@@ -13,21 +13,38 @@
 
    // }
 
-   function show(aval) {
+  //  function show(aval) {
 
-    if (aval == "1") {
-        hiddenPembeli.style.display='none';
+  //   if (aval == "1") {
+  //       hiddenPembeli.style.display='none';
 
-        hiddenPenjual.style.display='inline-block';
-        Form.fileURL.focus();
+  //       hiddenPenjual.style.display='inline-block';
+  //       Form.fileURL.focus();
 
-    }else{
-        hiddenPenjual.style.display='none';
+  //   }else{
+  //       hiddenPenjual.style.display='none';
 
-        hiddenPembeli.style.display='inline-block';
-        Form.fileURL.focus();
-    }
-  }
+  //       hiddenPembeli.style.display='inline-block';
+  //       Form.fileURL.focus();
+  //   }
+  // }
+
+$(document).ready(function(){
+    $(".userAs").change(function(){
+        $(this).find("option:selected").each(function(){
+            if($(this).attr("value")=="0"){
+                $(".box").not(".0").hide();
+                $(".pembeli").show();
+            }
+            else if($(this).attr("value")=="1"){
+                $(".box").not(".1").hide();
+                $(".penjual").show();
+            }else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});
 
 </script> 
 
@@ -38,18 +55,21 @@
                 <div class="panel-heading">Form Pendaftaran</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                        
                         {!! csrf_field() !!}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Daftar Sebagai</label>
                             <div class="col-md-6">
                                 <!-- <select class="form-control" name="userAs" id="userAs" onchange="changeFunc();"> -->
-                                <select class="form-control" name="userAs" id="userAs" onchange="java_script_:show(this.options[this.selectedIndex].value)">
-                                <!-- <select class="form-control" name="userAs" id="userAs"> -->
 
+                                <!-- <select class="form-control" name="userAs" id="userAs" onchange="java_script_:show(this.options[this.selectedIndex].value)"> -->
+                                <select class="form-control userAs" name="userAs" id="userAs">
                                     <option value="1">Penjual</option>
                                     <option value="0">Pembeli</option>
                                 </select>
+
                             </div>
 
                         <!-- <p id="showValue"></p> -->
@@ -141,30 +161,22 @@
                         </div>
 
 <!-- hiddenPenjual -->
-                        <div id="hiddenPenjual" style="display:none" class="col-md-6 col-md-offset-4">
-
+                        <div class="col-md-6 col-md-offset-4 penjual box">
                             <div class="form-group">
-                                <!-- <div class="col-md-6 col-md-offset-4"> -->
                                     <input type="text" class="form-control" name="city" value="Kab. Bandung" disabled>
-
-                                <!-- </div> -->
                             </div>
 
                             <div class="form-group">
-                                <!-- <div class="col-md-6 col-md-offset-4"> -->
                                     <input type="text" class="form-control" name="prov" value="Jawa Barat" disabled>
-                                <!-- </div> -->
                             </div>
 
                             <div class="form-group">
-                                <!-- <div class="col-md-6 col-md-offset-4"> -->
                                     <input type="text" class="form-control" name="zipCode" maxlength="5" value="40391" disabled>
-                                <!-- </div> -->
                             </div>
                         </div>
 
 <!-- hiddenPembeli -->
-                        <div id="hiddenPembeli" style="display:none" class="col-md-6 col-md-offset-4">
+                        <div class="col-md-6 col-md-offset-4 pembeli box">
                                                     
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <!-- <div class="col-md-6 col-md-offset-4"> -->
@@ -204,7 +216,6 @@
                                 <!-- </div> -->
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" name="submit" value="Register">

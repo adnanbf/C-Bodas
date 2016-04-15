@@ -8,8 +8,10 @@
                 <div class="panel-heading">Lapak</div>
 
                 <div class="panel-body">
-                    {{Auth::user()->name}}
-                    <a href="{{ url('merchant/create') }}" class="btn btn-warning btn-sm">Lapak Baru</a>
+                    Hai, {{Auth::user()->name}}
+                    <div>
+                        <a href="{{ url('merchant/create') }}" class="btn btn-warning btn-sm">Lapak Baru</a>
+                    </div>
                 </div>
             </div>
         </div>
