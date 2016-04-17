@@ -40,17 +40,25 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
 
-    // Route::get('/home', 'HomeController@index');
+    Route::get('/homepage', 'HomeController@showHomepage');
+
+	Route::get('/signin', 'SigninController@showSignin');
+
+	Route::get('/signup', 'SignupController@showSignup');
+
+	Route::get('/signuppembeli', 'SignuppembeliController@showSignuppembeli');
+
+	Route::get('/signuppenjual', 'SignuppenjualController@showSignuppenjual');
 
     Route::get('/', function(){
 		if (!empty(Auth::user())) {
 			if(Auth::user()->userAs == 1){
-				return view ('merchant/merchant_home');
+				return view ('templates/homepage');
 			}else{
 				return view('pembeli/pembeli_home');
 			}
 		}else{
-			return view('welcome');
+			return view('templates/homepage');
 		}
 	});
 
@@ -65,5 +73,5 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 Route::get('userAs', ['middleware'=>['web','auth','userAs'], function(){
-	return view('merchant/merchant_home');
+	return view('templates/penjual');
 }]);

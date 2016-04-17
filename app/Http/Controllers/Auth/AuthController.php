@@ -56,7 +56,7 @@ class AuthController extends Controller
             'street' => 'required|max:255',
             'city' => 'required|max:255',
             'prov' => 'required|max:255',
-            'zipCode' => 'required|min:5|max:5',
+            'zipCode' => 'required|max:5',
         ]);
     }
 

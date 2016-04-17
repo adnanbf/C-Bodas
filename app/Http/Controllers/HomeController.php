@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
     /**
@@ -22,12 +22,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showHomepage()
     {
-        // if(!empty(auth()->user()) && auth()->user()->userAs == 1){
-        //     return view ('merchant/merchant_home');
-        // }else{
-        //     return view('pembeli/pembeli_home');
-        // }
+        return view('templates\homepage'); 
     }
 }

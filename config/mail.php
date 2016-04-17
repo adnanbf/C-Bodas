@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'info@c-bodas.com', 'name' => 'No Reply'],
+    'from' => ['address' => null, 'name' => null],
 
     /*
     |--------------------------------------------------------------------------

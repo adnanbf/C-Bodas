@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>C-Bodas</title>
-
-    <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
-
-    <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
-<!-- bootsrap datepicker-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">  
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">  
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <!-- bootsrap datepicker-->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script> -->
+    
 
     <style>
         body {
@@ -48,7 +28,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     C-Bodas
                 </a>
             </div>
@@ -62,7 +42,7 @@
                 @else
                     <ul class="nav navbar-nav">
                         <!-- Authentication Links -->
-                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <!-- @if (Auth::user()->userAs == 1)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -76,7 +56,6 @@
                         @endif -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    @if (Auth::user()->userAs == 1)
                         <li class="dropdown">
                             <a href="{{ url('merchant/product') }}">
                                 Lapak
@@ -95,21 +74,6 @@
                                 </li>
                             </ul>
                         </li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('user/profile') }}">
-                                    <i class="fa fa-btn fa-user"></i>Lihat Profil</a>
-                                </li>
-                                <li><a href="{{ url('/logout') }}">
-                                    <i class="fa fa-btn fa-sign-out"></i>Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
                     </ul>
                 @endif
             </div>

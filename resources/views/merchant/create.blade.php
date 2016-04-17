@@ -2,27 +2,36 @@
 
 @section('content')
 
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
-<!-- bootsrap datepicker-->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">  
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet"> -->
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
-
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>   -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   -->
 
 <script type="text/javascript">
 
    // function changeFunc() {
    //  // var userAs = document.getElementById("userAs");
    //  // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-   //  var x = document.getElementById("massAvailable").value;
+   //  var x = document.getElementById("userAs").value;
    //  document.getElementById("showValue").innerHTML = x;
+
+
    // }
 
+  //  function show(aval) {
 
+  //   if (aval == "1") {
+  //       hiddenTernak.style.display='none';
+
+  //       hiddenPertanian.style.display='inline-block';
+  //       Form.fileURL.focus();
+
+  //   }else{
+  //       hiddenPertanian.style.display='none';
+
+  //       hiddenTernak.style.display='inline-block';
+  //       Form.fileURL.focus();
+  //   }
+  // }
 
 $(document).ready(function(){
     $(".category").change(function(){
@@ -69,11 +78,19 @@ $(document).ready(function(){
 //         });
 //     }).change();
 // });
+$(document).ready(function(){
+    $('#sandbox-container .input-append.date').datepicker({
+    clearBtn: true,
+    language: "id",
+    multidate: true,
+    forceParse: false,
+    todayHighlight: true,
+    datesDisabled: ['04/06/2016', '04/21/2016']
+});
+}
+
 
 </script> 
-@if (!empty(Auth::user()))
-    @if(Auth::user()->userAs == 1)
-                
 
 <div class="container">
     <div class="row">
@@ -144,7 +161,7 @@ $(document).ready(function(){
                                 </div>
 
                                 <div class="col-md-3">
-                                    <select class="form-control" name="massAvailable" id="massAvailable" onchange="cangeFunc();">
+                                    <select class="form-control" name="massAvailable" id="massAvailable">
                                         <option value="1">Gram</option>
                                         <option value="2">Ons</option>
                                         <option value="3">Kilogram</option>
@@ -152,7 +169,7 @@ $(document).ready(function(){
                                         <option value="5">Ton</option>
                                     </select>
                                 </div>
-                                
+
                             </div>
 
                             <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
@@ -187,7 +204,7 @@ $(document).ready(function(){
 
                                 <div class="col-md-2">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="year" step="1" placeholder="Tahun" min="0">
+                                    <input type="number" class="form-control" name="year" step="1" placeholder="Tahun">
 
                                     @if ($errors->has('year'))
                                         <span class="help-block">
@@ -198,7 +215,7 @@ $(document).ready(function(){
                                 
                                 <div class="col-md-2">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="month" step="1" placeholder="Bulan" min="0">
+                                    <input type="number" class="form-control" name="month" step="1" placeholder="Bulan">
 
                                     @if ($errors->has('month'))
                                         <span class="help-block">
@@ -209,7 +226,7 @@ $(document).ready(function(){
 
                                 <div class="col-md-2">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="day" step="1" placeholder="Hari" min="0">
+                                    <input type="number" class="form-control" name="day" step="1" placeholder="Hari">
 
                                     @if ($errors->has('day'))
                                         <span class="help-block">
@@ -230,6 +247,8 @@ $(document).ready(function(){
                                         <option value="F">Perempuan</option>
                                     </select>
                                 </div>
+
+                            <!-- <p id="showValue"></p> -->
 
                             </div>
 
@@ -259,16 +278,16 @@ $(document).ready(function(){
 
                             </div>
 
-                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Harga</label>
 
                                 <div class="col-md-8">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="price" step="50" min="0">
+                                    <input type="number" class="form-control" name="stock" step="50" min="0">
 
-                                    @if ($errors->has('price'))
+                                    @if ($errors->has('stock'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('price') }}</strong>
+                                            <strong>{{ $errors->first('stock') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -277,69 +296,32 @@ $(document).ready(function(){
                         </div>
 <!-- Wisata -->
                         <div class="col-md-9 col-md-offset-1 wisata box">
-                            <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Alamat</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
-
-                                    @if ($errors->has('street'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('street') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('village') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="village" value="Desa Cibodas" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="city" value="Kab. Bandung" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="prov" value="Jawa Barat" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="zipCode" maxlength="5" value="40391" disabled>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group{{ $errors->has('ticket') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Jumlah Tiket</label>
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Stok Tersedia</label>
 
                                 <div class="col-md-4">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="ticket" step="1">
+                                    <input type="number" class="form-control" name="stock" step="1">
 
-                                    @if ($errors->has('ticket'))
+                                    @if ($errors->has('stock'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('ticket') }}</strong>
+                                            <strong>{{ $errors->first('stock') }}</strong>
                                         </span>
                                     @endif
                                 </div>
+
                             </div>
 
-                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Harga</label>
 
                                 <div class="col-md-4">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="price" step="50">
+                                    <input type="number" class="form-control" name="stock" step="50">
 
-                                    @if ($errors->has('price'))
+                                    @if ($errors->has('stock'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('price') }}</strong>
+                                            <strong>{{ $errors->first('stock') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -347,61 +329,16 @@ $(document).ready(function(){
                         </div>
 <!-- Villa -->
                         <div class="col-md-9 col-md-offset-1 villa box">
-                            <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Alamat</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
-
-                                    @if ($errors->has('street'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('street') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('village') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="village" value="Desa Cibodas" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="city" value="Kab. Bandung" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="prov" value="Jawa Barat" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="zipCode" maxlength="5" value="40391" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('dateOrdered') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Tanggal Sudah Terpesan</label>
                                 
-                                <div class="col-md-6">
-                                    <input class="date form-control" type="text" name="dateOrdered">
-                                    <script type="text/javascript">  
-                                        $('.date').datepicker({
-                                            startDate: "today",
-                                            format: "dd/mm/yyyy",
-                                            clearBtn: true,
-                                            language: "id",
-                                            multidate: true,
-                                            forceParse: false,
-                                            todayHighlight: true,
-                                            datesDisabled: ['04/06/2016', '04/21/2016']  
-                                         });  
-                                    </script>  
+                                <div class="input-append date">
+                                    <input type="text" class="span2"><span class="add-on" onclick="datepicker"><i class="icon-th"></i></span>
+                                </div>
+                                
+                                <div class="col-md-4 input-append date">
+                                    <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
+                                    <input type="text" class="span2"><span class="add-on"><i class="icon-th"></i></span>
 
                                     @if ($errors->has('stock'))
                                         <span class="help-block">
@@ -412,16 +349,16 @@ $(document).ready(function(){
 
                             </div>
 
-                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Harga</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="price" step="50" min="0">
+                                    <input type="number" class="form-control" name="stock" step="50">
 
                                     @if ($errors->has('stock'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('price') }}</strong>
+                                            <strong>{{ $errors->first('stock') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -429,91 +366,12 @@ $(document).ready(function(){
                         </div>
 <!-- Edukasi -->
                         <div class="col-md-9 col-md-offset-1 edukasi box">
-
-                            <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Alamat</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" placeholder="Jalan + Nomor" value="{{ old('street') }}">
-
-                                    @if ($errors->has('street'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('street') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('village') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="village" value="Desa Cibodas" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="city" value="Kab. Bandung" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="prov" value="Jawa Barat" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <input type="text" class="form-control" name="zipCode" maxlength="5" value="40391" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('quota') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Kuota</label>
-
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="quota" value="{{ old('quota') }}" min="0">
-
-                                    @if ($errors->has('quota'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('quota') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Harga</label>
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Stok Tersedia</label>
 
                                 <div class="col-md-4">
                                     <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
-                                    <input type="number" class="form-control" name="price" step="50" min="0">
-
-                                    @if ($errors->has('stock'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('price') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('dateOrdered') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Tanggal Sudah Terpesan</label>
-                                
-                                <div class="col-md-4">
-                                    <input class="date form-control" type="text" name="dateOrdered">
-                                    <script type="text/javascript">  
-                                        $('.date').datepicker({
-                                            startDate: "today",
-                                            format: "dd/mm/yyyy",
-                                            clearBtn: true,
-                                            language: "id",
-                                            multidate: true,
-                                            forceParse: false,
-                                            todayHighlight: true,
-                                            datesDisabled: ['04/06/2016', '04/21/2016']  
-                                         });  
-                                    </script>  
+                                    <input type="number" class="form-control" name="stock" step="1">
 
                                     @if ($errors->has('stock'))
                                         <span class="help-block">
@@ -522,6 +380,21 @@ $(document).ready(function(){
                                     @endif
                                 </div>
 
+                            </div>
+
+                            <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Harga</label>
+
+                                <div class="col-md-4">
+                                    <!-- <textarea class="form-control" name="desc" value="{{ old('desc') }}"> -->
+                                    <input type="number" class="form-control" name="stock" step="50">
+
+                                    @if ($errors->has('stock'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('stock') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
@@ -532,16 +405,12 @@ $(document).ready(function(){
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@else
-    return view('/');
-@endif
-@endif
 
 @endsection
